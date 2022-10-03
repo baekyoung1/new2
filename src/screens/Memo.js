@@ -1,10 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, TextInput, 
-          TouchableOpacity, View, FlatList, Alert } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, FlatList, Alert } from 'react-native';
+import styled, { ThemeProvider } from 'styled-components/native'; 
 
+const Container = styled.SafeAreaView`
+  flex:1;
+  backgroundColor: ${({ theme }) => theme.memobackground};
+  align-items: center;
+  justify-content: flex-start;
+  flexDirection: row;
+  padding: 15px;
+`;
 
+const List =styled.View`
+  backgroundColor: ${({ theme }) => theme.memobackground};
 
+`;
 
 export default function App() {
 
@@ -14,7 +25,8 @@ export default function App() {
   const orimemo = [
     { 
       id:'1',
-      memo:'안녕하세요. 당신의 메모를 추가해보세요.'
+      memo:'New text'
+      
     }
   ];
 
@@ -33,41 +45,46 @@ export default function App() {
 
   const renderMemo = ({item}) =>{
     return(
-      <View style={{padding:10, borderBottomColor:'#ddd', borderBottomWidth:1,  flexDirection:'row'}}>
-        <Text style={{marginRight:10, }}>{item.id}</Text>
-        <Text>{item.memo}</Text>
-      </View>
+        <Container View style={{padding:30, borderBottomColor:'#d4e6ff', borderBottomWidth:1,  flexDirection:'row'}}>
+          <Text style={{marginRight:10,color:'#778bdd', }}>{item.id}</Text>
+          <Text style={{color:'#778bdd',}}>{item.memo}</Text>
+        </Container>
+      
     );
   }
 
 
   if(writeMode){
     return (
-      <SafeAreaView style={{flex:1, backgroundColor:'#9c0', }}>
 
-      <View  style={{flex:1,   }}>        
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-          <TouchableOpacity style={{padding:15, }} onPress={()=>setWriteMode(false)}>
-            <Text style={{fontSize:18, }} >취소</Text>
-          </TouchableOpacity>
 
-          <TouchableOpacity style={{padding:15, }}     onPress={()=>addMemo()} >
-            <Text style={{fontSize:18, }}>저장</Text>
-          </TouchableOpacity>
+          
+          <Container SafeAreaView style={{flex:1,  }}>
 
-        </View>
-        <View style={{flex:1, backgroundColor:'#fff', }}>
-        <TextInput
-            style={{  backgroundColor: '#eee',flex:1, padding:10,  }}
-            onChangeText={text => setTxt(text)}
-            multiline 
-            
-          />
-        </View>
+          <View  style={{flex:1,   }}>        
+            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+              <TouchableOpacity style={{padding:15, }} onPress={()=>setWriteMode(false)}>
+                <Text style={{fontSize:13,color:'#778bdd', }} >cancel</Text>
+              </TouchableOpacity>
 
-        <StatusBar style="auto" />
-      </View>
-      </SafeAreaView>
+              <TouchableOpacity style={{padding:15, }}     onPress={()=>addMemo()} >
+                <Text style={{fontSize:13,color:'#778bdd', }}>done</Text>
+              </TouchableOpacity>
+
+            </View>
+            <View style={{flex:1, backgroundColor:'#fff', }}>
+            <TextInput
+                style={{  backgroundColor: '#ffffff',flex:1, padding:10,  }}
+                onChangeText={text => setTxt(text)}
+                multiline 
+                
+              />
+            </View>
+
+            <StatusBar style="auto" />
+          </View>
+          
+          </Container>
     );
   }
 
@@ -75,22 +92,19 @@ export default function App() {
 
 
   return (
+    <List SafeAreaView style={{flex:1,  }}>
+      
+      <View style={{flex:1,  }}>
 
-    <SafeAreaView style={{flex:1, backgroundColor:'tomato', }}>
-      <View style={{}}>
-        <Text style={{fontSize:18, padding:15, textAlign:'center'}}>메모장</Text>
-      </View>
-      <View style={{flex:1, backgroundColor:'#fff', }}>
-
-        <View style={{position:'absolute', right:20, bottom:20,zIndex:10,  }}>
-          <View style={{          width:50, height:50, backgroundColor:'tomato', borderRadius:25,
+        <SafeAreaView style={{position:'absolute', right:20, bottom:20,zIndex:10,  }}>
+          <View style={{          width:40, height:40, backgroundColor:'#778bdd', borderRadius:25,
                 alignItems:'center', justifyContent:'center', 
             }}>          
             <TouchableOpacity onPress={()=>setWriteMode(true)}>       
-              <Text style={{color:'#ffff', }}>글쓰기</Text>
+              <Text style={{color:'white', fontSize: 20 }}>+</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </SafeAreaView>
       
 
 
@@ -104,7 +118,7 @@ export default function App() {
       <StatusBar style="auto" />
 
       
-      </SafeAreaView> 
+    </List>
 
   );
 }

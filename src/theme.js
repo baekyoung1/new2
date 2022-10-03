@@ -50,6 +50,8 @@ export const theme = {
   sendBtnActive: Colors.main,
   sendBtnInactive: Colors.grey_1,
   
+  //memo
+  memobackground : '#e6eefa',
 
 };
 
@@ -81,4 +83,5 @@ export const dark = {
   imgBtnBackground: Colors.grey_1,
   imgBtnIcon: Colors.white,
   imgBackground: Colors.white,
+  memobackground : '#000000',
 };

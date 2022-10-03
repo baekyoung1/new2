@@ -5,6 +5,7 @@ import { ChannelList, Profile, } from '../screens';
 import Todo from '../screens/Todo';
 import Memo from '../screens/Memo';
 import Timer from '../screens/Timer';
+import {Calendar} from '../screens/Calendar';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -79,7 +80,7 @@ const Home = ({ navigation, route }) => {
         
         <Tab.Screen
           name="Calendar"
-          component={Profile}
+          component={Calendar}
           options={{
             tabBarIcon: props =>
               TabIcon({
